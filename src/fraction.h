@@ -11,11 +11,47 @@ class Fraction {
     friend std::ostream& operator<<(std::ostream& o , const Fraction& f);
 public: // implicit for struct, no need to write it
     Fraction(int num = 0, int den = 1);
+    // Any constructor which takes/accepts one parameter
+    // is a conversion constructor
+
    // Fraction(int num);
    // Fraction();
 
     Fraction& operator += (const Fraction &f);
     Fraction& operator -= (const Fraction &f);
+
+    // Implementing + as a method prevents 
+    // int + Fraction 
+    /*Fraction operator+(const Fraction &b) {
+        Fraction t{*this};
+        return t += b;
+    }*/
+
+    // operator double();
+
+    // Prefix (++f)
+    Fraction& operator++() {
+        return *this += 1;
+    }
+
+    // Prefix (--f)
+    Fraction& operator--() {
+        return *this -= 1;
+    }
+
+    // Postfix (f++)
+    Fraction operator++(int) {
+        Fraction x{*this}; // Fraction x= *this;
+        *this += 1;
+        return x;
+    }
+
+    // Postfix (f--)
+    Fraction operator--(int) {
+        Fraction x{*this}; // Fraction x= *this;
+        *this -= 1;
+        return x;
+    }
 
     void set_num(int i);
     void set_den(int i);
@@ -30,6 +66,10 @@ private:
     int m_num, m_den;
     double m_val;
 };
+
+Fraction operator+(Fraction a, const Fraction &b);
+Fraction operator-(Fraction a, const Fraction &b);
+Fraction operator-(const Fraction& a);
 
 #endif
 

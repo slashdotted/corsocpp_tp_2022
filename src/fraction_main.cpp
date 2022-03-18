@@ -15,20 +15,22 @@ std::ostream& operator<<(std::ostream& o , const Fraction& f) {
          << f.m_val <<  '\n';
 }
 
-Fraction operator+(Fraction a, const Fraction &b) {
-    return a += b;
+void foo(const Fraction& o) {
+
 }
 
-Fraction operator-(Fraction a, const Fraction &b) {
-    return a -= b;
+struct Storage {
+    explicit Storage(int size) {}
+
+};
+
+void bar(const Storage& s) {
+
 }
 
-Fraction operator-(const Fraction& a) {
-    //return Fraction{-a.get_num(), a.get_den()};
-    return {-a.get_num(), a.get_den()};
+void baz(double d) {
+
 }
-
-
 
 int main() {
     Fraction f;
@@ -41,9 +43,35 @@ int main() {
     Fraction f3 = f+*f2;
 
     // ...
+    int i{7};
+    int j{13};
+    int z{i + j};
+    int z1{j + i};
 
     //f += *f2; // f = f+f2
+    Fraction f4 = 7;
+    f3 = 7; // f3 = Fraction{7};
+    Fraction f5{7};
+    foo(7);
 
+    //baz(f3);
+    //double m{f3};
+    //m = *f2;
+
+    // bar(10); // Cannot automatically convert int to Storage
+                // because Storage(int) is explicit
+    bar(Storage{10});
+
+    Fraction f6 = f + i; // f.operator+(i) -> f.operator+(Fraction{i})
+    //Fraction f7 = i + f; // i.operator+(f)
+
+
+    // f.operator+(Fraction{i})
+    // double(f) + i
+
+
+
+    Fraction f7 = i + f;
 
     delete f2;
 }
