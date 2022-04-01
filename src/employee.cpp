@@ -23,7 +23,7 @@ int Employee::employeenr() const
 {
     return m_employeenr;
 }
-const std::string & Employee::classname() const
+std::string Employee::classname() const
 {
     return "Employee";
 }

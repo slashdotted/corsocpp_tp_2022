@@ -5,7 +5,7 @@
 #include <string>
 
 // TODO: Make Researcher an employee
-class Researcher :  public Employee {
+class Researcher : public Employee {
 public:
     Researcher(const std::string &name, const std::string &institute, int nr,
                const std::string &researcharea);

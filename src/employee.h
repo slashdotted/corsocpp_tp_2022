@@ -10,7 +10,7 @@ public:
     const std::string &name() const;
     const std::string &institute() const;
     int employeenr() const;
-    const std::string & classname() const;
+    std::string classname() const;
 
 protected:
     std::string m_name;

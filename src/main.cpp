@@ -1,35 +1,55 @@
 #include <iostream>
 #include <string>
-#include <memory>
+#include "employee.h"
+#include "researcher.h"
+#include "lecturer.h"
 
-class A {
-public:
-    int i;
-};
-
-class B : A  { // if we forget "public" it is private derivation by default
-
-};
-
-struct C : A  { // if we forget "public" it is public derivation by default
-
-};
-
-void foo(const A& a) {
-
+void printName(const Employee& e) {
+    std::cout << "The employee is called: " << e.name() << "\n";
 }
 
+void printName(const Employee* e) {
+    std::cout << "The employee is called: " << e->name() << "\n";
+}
+
+void printNameByValue(Employee e) {
+    std::cout << "The employee is called: " << e.name() << "\n";
+}
+
+
+void printClass(const Employee& e) {
+    std::cout << "The employee is: " << e.classname() << "\n";
+}
+
+void printClass(const Employee* e) {
+    std::cout << "The employee is: " << e->classname() << "\n";
+}
+
+void printClassByValue(Employee e) {
+    std::cout << "The employee is: " << e.classname() << "\n";
+}
+
+
 int main() {
-  /*  A objA;
-    objA.i = 42;
+    Employee elvis{"Elvis", "SI", 123};
+    Researcher bob{"Bob", "DTI", 124, "Networking"};
+    Lecturer alice{"Alice", "DTI", 125, "Security", "Lab"};
+    printName(elvis);
+    printName(bob);
+    printName(alice);
+    printName(&elvis);
+    printName(&bob);
+    printName(&alice);
+    printNameByValue(elvis);
+    printNameByValue(bob);
+    printNameByValue(alice);
 
-    B objB;
-    objB.i = 5;
-    foo(obj);
-    foo(objB);
+    std::cout << elvis.classname() << '\n';
+    std::cout << bob.classname() << '\n';
+    std::cout << alice.classname() << '\n';
 
-    C objC;
-    objC.i = 5;
-    foo(objA);
-    foo(objC);*/
+    printClass(elvis);
+    printClass(bob);
+    printClass(alice);
+
 }
