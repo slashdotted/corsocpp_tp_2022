@@ -3,6 +3,10 @@ using std::cout, std::endl;
 
 class Base {
 public:
+    // The destructor should be Virtual
+    // so that destruction of the derived classes
+    // is ensured even when working with Base class pointers 
+    // or references
     virtual ~Base() {
         cout << "Destroying Base" << endl;
     }
