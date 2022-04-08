@@ -11,7 +11,7 @@ public:
 
 class Derived : public Base {
 public:
-    void f(double x)
+    void f(double x) override
     {
         cout << "Derived::f(double x)" << endl;
     }

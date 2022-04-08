@@ -17,7 +17,7 @@ public:
 
 class DoubleDerived : public Derived {
 public:
-    void bar() {
+    void bar() override {
         cout << "\tDoubleDerived::bar()" << endl;
     }
 };

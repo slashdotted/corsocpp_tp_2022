@@ -3,7 +3,16 @@
 
 #include <string>
 
-class Employee {
+class AbstractEmployee {
+    // virtual makes Employee a polymorphic type
+    // virtual makes classname a polymorphic method
+    virtual std::string classname() const = 0;
+    // if we add = 0, we call the method "pure virtual"
+    // there is no implementation here for pure virtual methods
+};
+
+
+class Employee : public AbstractEmployee {
 public:
     Employee(const std::string &name, const std::string &institute, int nr);
     ~Employee();
@@ -11,9 +20,7 @@ public:
     const std::string &institute() const;
     int employeenr() const;
 
-    // virtual makes Employee a polymorphic type
-    // virtual makes classname a polymorphic method
-    virtual std::string classname() const; 
+    std::string classname() const override; 
 
 protected:
     std::string m_name;

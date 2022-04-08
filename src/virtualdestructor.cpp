@@ -3,7 +3,7 @@ using std::cout, std::endl;
 
 class Base {
 public:
-    ~Base() {
+    virtual ~Base() {
         cout << "Destroying Base" << endl;
     }
 };
@@ -11,7 +11,7 @@ public:
 class Derived : public Base {
 public:
     Derived() : m_intptr { new int } {};
-    ~Derived() {
+    ~Derived() override {
         cout << "Destroying Derived" << endl;
         delete m_intptr;
     }

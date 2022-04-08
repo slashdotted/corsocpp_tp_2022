@@ -13,6 +13,7 @@ public:
         cout << "\tCalling baz()" << endl;
         baz();
     }
+    
     void baz() {
         cout << "\tBase::baz()" << endl;
     }
@@ -34,6 +35,7 @@ int main() {
     Base b;
     Derived d;
     Base &bd{d};
+    // Base *bp{&d};
 
     cout << "Calling b.foo()" << endl;
     b.foo();

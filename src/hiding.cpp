@@ -11,15 +11,21 @@ public:
 
 class Derived : public Base {
 public:
+    using Base::f;
+
     void f(int x)
     {
         cout << "Derived::f(int x)" << endl;
     }
+
+    /*void f(double x) override {
+        Base::f(x);
+    }*/
 };
 
 int main()
 {
     Derived e;
-    e.f(3.2);
+    // e.Base::f(3.2);
     e.f(3);
 }
