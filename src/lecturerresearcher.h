@@ -17,6 +17,9 @@ public:
                     double researchpercentage);
 
     double researchpercentage() const;
+    //std::string name() const;
+
+    std::string classname() const override; 
 
 protected:
     double m_researchpercentage;

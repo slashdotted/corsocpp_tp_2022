@@ -3,55 +3,35 @@
 #include "employee.h"
 #include "researcher.h"
 #include "lecturer.h"
+#include "lecturerresearcher.h"
 
-void printName(const Employee& e) {
-    std::cout << "The employee is called: " << e.name() << "\n";
+void employee_addr(Employee* ptr) {
+    std::cout <<"Address of employee: " << (intptr_t) ptr << '\n';
 }
 
-void printName(const Employee* e) {
-    std::cout << "The employee is called: " << e->name() << "\n";
+void researcher_addr(Researcher* ptr) {
+    std::cout <<"Address of researcher: " << (intptr_t) ptr << '\n';
 }
 
-void printNameByValue(Employee e) {
-    std::cout << "The employee is called: " << e.name() << "\n";
+void lecturer_addr(Lecturer* ptr) {
+    std::cout <<"Address of lecturer: " << (intptr_t) ptr << '\n';
 }
 
-void printClass(const Employee& e) {
-    std::cout << "The employee is: " << e.classname() << "\n";
+void lecturerresearcher_addr(LecturerResearcher* ptr) {
+    std::cout <<"Address of lecturer researcher: " << (intptr_t) ptr << '\n';
 }
-
-void printClass(const Employee* e) {
-    std::cout << "The employee is: " << e->classname() << "\n";
-}
-
-void printClassByValue(Employee e) {
-    std::cout << "The employee is: " << e.classname() << "\n";
-}
-
 
 int main() {
-    Employee elvis{"Elvis", "SI", 123};
-    Researcher bob{"Bob", "DTI", 124, "Networking"};
-    Lecturer alice{"Alice", "DTI", 125, "Security", "Lab"};
-    printName(elvis);
-    printName(bob);
-    printName(alice);
-    printName(&elvis);
-    printName(&bob);
-    printName(&alice);
-    printNameByValue(elvis);
-    printNameByValue(bob);
-    printNameByValue(alice);
+    using std::cout;
+    LecturerResearcher john{"John", "DTI", 456, "Blabla", "FooFoo", "Coffee", 0.6};
 
-    std::cout << elvis.classname() << '\n';
-    std::cout << bob.classname() << '\n';
-    std::cout << alice.classname() << '\n';
+    // cout << "Name: " << john.Researcher::name();
+    cout << "Name: " << john.name();
+    cout  << " Research area: " <<john.researcharea()
+        << " %:"<< john.researchpercentage() << " Course:"<< john.course() << '\n';
 
-    printClass(elvis);
-    printClass(bob);
-    printClass(alice);
-
-    printClassByValue(elvis);
-    printClassByValue(bob);
-    printClassByValue(alice);
+    lecturerresearcher_addr(&john);
+    lecturer_addr(&john); 
+    researcher_addr(&john); 
+    employee_addr(&john); 
 }
