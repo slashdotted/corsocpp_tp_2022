@@ -1,5 +1,6 @@
 
 #include "lecturer.h"
+#include "employee.h"
 #include <iostream>
 
 Lecturer::Lecturer(const std::string &name, const std::string &institute,
@@ -22,5 +23,6 @@ const std::string &Lecturer::course() const {
 }
 
 std::string Lecturer::classname() const {
-    return "Lecturer";
+    // BASECLASS::METHOD is used instead of super.method
+    return Employee::classname() + "Lecturer";
 }

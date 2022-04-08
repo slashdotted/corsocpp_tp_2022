@@ -16,7 +16,6 @@ void printNameByValue(Employee e) {
     std::cout << "The employee is called: " << e.name() << "\n";
 }
 
-
 void printClass(const Employee& e) {
     std::cout << "The employee is: " << e.classname() << "\n";
 }
@@ -52,4 +51,7 @@ int main() {
     printClass(bob);
     printClass(alice);
 
+    printClassByValue(elvis);
+    printClassByValue(bob);
+    printClassByValue(alice);
 }

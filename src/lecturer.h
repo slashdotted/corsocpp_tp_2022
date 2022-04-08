@@ -11,7 +11,10 @@ public:
     ~Lecturer();
     const std::string &studies() const;
     const std::string &course() const;
-    std::string classname() const;
+
+    // override marks this method as an override
+    // will not compile if classname is not virtual
+    std::string classname() const override;
 
 protected:
     std::string m_studies;

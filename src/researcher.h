@@ -11,7 +11,8 @@ public:
                const std::string &researcharea);
     ~Researcher();
     const std::string &researcharea() const;
-    std::string classname() const;
+    
+    std::string classname() const override;
 
 protected:
     std::string m_researcharea;

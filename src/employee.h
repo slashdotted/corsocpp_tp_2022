@@ -10,7 +10,10 @@ public:
     const std::string &name() const;
     const std::string &institute() const;
     int employeenr() const;
-    std::string classname() const;
+
+    // virtual makes Employee a polymorphic type
+    // virtual makes classname a polymorphic method
+    virtual std::string classname() const; 
 
 protected:
     std::string m_name;
