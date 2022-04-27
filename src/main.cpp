@@ -1,112 +1,78 @@
+#include <cstdint>
 #include <iostream>
 #include <string>
-#include "employee.h"
-#include "researcher.h"
-#include "lecturer.h"
-#include "lecturerresearcher.h"
-#include <map>
+#include "mylist.h"
 
-struct Generator {
-
-    int get_value(int k) const {
-        auto nc_this = const_cast<Generator*>(this);
-        if (m_cache.count(k)) {
-            return m_cache.at(k);
-        } else {
-            auto r = 42*k;
-            nc_this->m_cache[k] = r;
-            return r;
-        }
-    }
-
-private:
-    std::map<int, int> m_cache;
+template <typename A, typename B = int>
+struct Pair {
+    A a;
+    B b;
 };
 
-void fn(const Generator& o) {
-    o.get_value(5);
-}
+template <typename A = double>
+struct Vector {
+    A x;
+    A y;
+    A z;
+};
 
-void employee_addr(Employee* ptr) {
-    std::cout <<"Address of employee: " << (intptr_t) ptr << '\n';
-}
 
-void researcher_addr(Researcher* ptr) {
-    std::cout <<"Address of researcher: " << (intptr_t) ptr << '\n';
-}
+// Size is a non-type template parameter
+template <typename A, int Size = 1000>
+struct MyData {
+    int get() {
+        return Size;
+    }
+    A m_a;
+};
 
-void lecturer_addr(Lecturer* ptr) {
-    std::cout <<"Address of lecturer: " << (intptr_t) ptr << '\n';
-}
+// Generic class
+template <typename T>
+struct Foo {
+    void printLength(T x) {
+        std::cout << sizeof(x) << ":" << x << '\n';
+    }
+};
 
-void lecturerresearcher_addr(LecturerResearcher* ptr) {
-    std::cout <<"Address of lecturer researcher: " << (intptr_t) ptr << '\n';
-}
+// Specialization for T = std::string
+template <>
+struct Foo<std::string> {
+    void printLength(std::string x) {
+        std::cout << x.size() << ":" << x << '\n';
+    }
+};
 
-// Emulating instanceof
-bool instance_of_lecturer(Employee* e) {
-    return dynamic_cast<Lecturer*>(e);
-}
+// Specialization for T*
+template <typename T>
+struct Foo<T*> {
+    void printLength(T* x) {
+        std::cout << sizeof(*x) << ":" << *x << '\n';
+    }
+};
+
 
 int main() {
-    using std::cout;
-    LecturerResearcher john{"John", "DTI", 456, "Blabla", "FooFoo", "Coffee", 0.6};
+    MyList<int> m1{10};
+    MyList<double> m2{20};
 
-    // static_cast<DestType>(source)
-    // =============================
-{
-    // You can static_cast values
-    Employee e = static_cast<Employee>(john);
+    m1[0] = 52;
+    std::cout << m1[0] << '\n';
 
-    // static_cast of enum class
-    enum class Importance { LOW, MEDIUM, HIGH};
-    int a = static_cast<int>(Importance::MEDIUM);
-    auto b = static_cast<Importance>(2);
+    Pair<int,double> x{5,3.14};
+    Pair<int> y{6,7};
+    Vector<double> v{1.2,3.1,5.1};
+    Vector<> v2{1.2,3.1,5.1};
 
-    // You can static_cast refs or pointers
-    auto re = static_cast<Researcher&>(john);
-    auto le = static_cast<Lecturer*>(&john);
+    MyData<double, 1000> md;
+    MyData<double> md1;
 
-    auto ee = static_cast<Employee*>(&john);
-    
-    // Cannot static_cast (downcast) if we are traversing a virtual derivation
-    // Lecturer* lee = static_cast<Lecturer*>(ee);
-
-    Lecturer alice{"Alice", "DTI", 535, "Foo", "Bar"};
-    LecturerResearcher* alicelr = static_cast<LecturerResearcher*>(&alice);
-    std::cout << alicelr->researchpercentage() << '\n';
-}
-    // dynamic_cast<DestType>(source)
-    // =============================
-{   
-    // You cannot dynamic_cast values 
-    // Employee e = dynamic_cast<Employee>(john);
-
-    // Upcasting works as expected
-
-    // You can dynamic_cast refs or pointers
-    auto re = dynamic_cast<Researcher&>(john);
-    auto le = dynamic_cast<Lecturer*>(&john);
-    auto ee = dynamic_cast<Employee*>(&john);
-
-
-    Lecturer alice{"Alice", "DTI", 535, "Foo", "Bar"};
-    LecturerResearcher* alicelr = dynamic_cast<LecturerResearcher*>(&alice);
-    if (alicelr) { // nullptr
-        std::cout << alicelr << '\n';
-    }
-
-    try {
-        LecturerResearcher& alicelr2 = dynamic_cast<LecturerResearcher&>(alice);
-    } catch(...) {
-        // the cat has failed
-    }
-    
-    //void* aliceptr = &alice;
-    //LecturerResearcher* aliceptr2 = dynamic_cast<LecturerResearcher*>(aliceptr);
-    const LecturerResearcher* calicelr = dynamic_cast<LecturerResearcher*>(&alice);
-    LecturerResearcher* ncalicelr = const_cast<LecturerResearcher*>(calicelr);
-}
+    Foo<int> f;
+    f.printLength(7);
+    Foo<std::string> g;
+    g.printLength("my string");
+    Foo<int*> h;
+    int u{3};
+    h.printLength(&u);
 
 }
 
