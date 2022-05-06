@@ -34,7 +34,7 @@ struct Foo {
     }
 };
 
-// Specialization for T = std::string
+// FULL Specialization for T = std::string
 template <>
 struct Foo<std::string> {
     void printLength(std::string x) {
@@ -50,6 +50,78 @@ struct Foo<T*> {
     }
 };
 
+// Template class
+template<class A, class B>
+struct MyPair {
+    A a;
+    B b;
+
+    void info();
+};
+
+template<class A, class B>
+void MyPair<A,B>::info() {
+        std::cout << "MyPair<A,B>\n";
+}
+
+// Partial Specialization
+template<class A>
+struct MyPair<A,int> {
+    A a;
+    int b;
+
+    void info() {
+        std::cout << "MyPair<A,int>\n" << a << b;
+    }
+};
+
+// Partial Specialization
+template<class B>
+struct MyPair<double,B> {
+    double a;
+    B b;
+
+    void info() {
+        std::cout << "MyPair<double,B>\n" << a << b;
+    }
+};
+
+// Full Specialization
+template<>
+struct MyPair<std::string,double> {
+    std::string a;
+    double b;
+
+    void info() {
+        std::cout << "MyPair<std::string,double>\n" << a << b;
+    }
+};
+
+/*int mymax(int a, int b) {
+   return a > b ? a : b;
+}
+
+double mymax(double a, double b) {
+   return a > b ? a : b;
+}*/
+
+// Template function
+template<typename T>
+T mymax(T a, T b) {
+    return a > b ? a : b;
+}
+
+// Full specialization 
+template<>
+std::string mymax<std::string>(std::string a, std::string b) {
+    return a > b ? a : b;
+}
+
+// Template function
+template<typename T, typename U>
+auto add(T a, U b) {
+    return a + b;
+}
 
 int main() {
     MyList<int> m1{10};
@@ -74,5 +146,9 @@ int main() {
     int u{3};
     h.printLength(&u);
 
+    mymax(3.2, 4.5);
+
+    add(3.5, 3);
+    add(3, 3.5);
 }
 
