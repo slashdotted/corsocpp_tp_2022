@@ -16,6 +16,15 @@ struct Funny {
     }
 };
 
+struct SimilarToL3 {
+    int v;
+    int x;
+    int y;
+    int operator()(){
+        return v+x+y;
+    };
+}
+
 int main() {
     Funny f;    
     f(2);
@@ -42,11 +51,13 @@ int main() {
         return v+x+y;
     };
 
+    SimilarToL3 sl3{v,x,y};
+    sl3();
+
     // This captures everything by reference
     auto l4 = [&] () {
         return v+x+y;
     };
-
 
     // This captures everything by value, but x (which is capture by ref)
     auto l5 = [=,&x] () {
