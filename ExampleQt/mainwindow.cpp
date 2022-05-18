@@ -1,5 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include "dialog.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -20,6 +21,9 @@ void MainWindow::onButtonClicked()
 {
     ui->bottone->setText("Ok");
     ui->rotella->setValue(0);
+    Dialog d{this};
+    d.exec();
+
 }
 
 
