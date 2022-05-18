@@ -16,6 +16,9 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
+private slots:
+    void on_cell_clicked();
+
 private:
     // Ritorna lo stato della cella: "" (vuota), "O", "X"
     QString stato(int riga, int colonna);
