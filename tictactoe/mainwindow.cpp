@@ -36,8 +36,9 @@ MainWindow::MainWindow(QWidget *parent)
    connect(m_proxy, SIGNAL(new_game_requested(QString)),
            this, SLOT(on_new_game(QString)));
 
-   update_player();
+   m_proxy->setProperty("player","o");
 
+   update_player();
 }
 
 void MainWindow::on_cell_clicked()
