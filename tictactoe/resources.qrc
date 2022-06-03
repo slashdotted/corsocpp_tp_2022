@@ -1,0 +1,7 @@
+<RCC>
+    <qresource prefix="/icons">
+        <file>o.png</file>
+        <file>starred.png</file>
+        <file>x.png</file>
+    </qresource>
+</RCC>

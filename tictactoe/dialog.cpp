@@ -6,6 +6,7 @@ Dialog::Dialog(const QString &message, QWidget *parent) :
     ui(new Ui::Dialog)
 {
     ui->setupUi(this);
+    ui->label->setText(message);
 }
 
 Dialog::~Dialog()
